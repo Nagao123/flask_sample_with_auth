@@ -1,0 +1,14 @@
+*.0
+*.bk
+*.swp
+test_*.py
+application/config.py
+!application/config.py.sample
+uwsgi/uwsgi.ini
+uwsgi/tmp/*
+!uwsgi/tmp/.gitkeep
+script
+__pycache__
+migrations
+.python-version
+venv/

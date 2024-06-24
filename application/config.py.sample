@@ -1,0 +1,54 @@
+import os
+from datetime import timedelta
+
+class AppConfig:
+
+	## Flask
+	DEBUG = True
+	SECRET_KEY = os.urandom(36)
+
+	## Flask User, Password
+	USERNAME_MINLENGTH = 8
+	USERNAME_MAXLENGTH = 64
+	PASSWORD_MINLENGTH = 21
+	PASSWORD_MAXLENGTH = 64
+
+	## JWT
+	JWT_SECRET_KEY = 'secret random string'
+	JSON_AS_ASCII = False
+	JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=int)
+	JWT_REFRESH_TOKEN_EXPIRES = timedelta(hours=int)
+	SIGNUP_TOKEN_EXPIRES = timedelta(hours=int)
+	RESET_TOKEN_EXPIRES = timedelta(hours=int)
+	## For development only
+	JWT_COOKIE_SECURE = False
+
+	## CORS
+	ORIGINS = [
+		'*'
+	]
+
+	## SQLAlchemy (MySQL)
+	SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{host}/{db_name}?charset={charset}'.format(**{
+		'user'    : os.getenv('DB_USER', 'user'),
+		'password': os.getenv('DB_PASSWORD', 'pass'),
+		'host'    : os.getenv('DB_HOST', 'localhost'),
+		'db_name' : os.getenv('DB_NAME', 'db_name'),
+		'charset' : os.getenv('DB_CHARSET', 'utf8mb4'),
+	})
+
+	SQLALCHEMY_TRACK_MODIFICATIONS = False
+	SQLALCHEMY_ECHO = False
+
+	## mail server
+	MAIL_SERVER = 'server'
+	MAIL_PORT = port(int)
+	MAIL_SENDER = 'Example'
+	MAIL_USERNAME = 'example@example.com'
+	MAIL_PASSWORD = 'password'
+	MAIL_BCC = '' ## Add if needed
+	MAIL_USE_TLS = True
+	MAIL_USE_SSL = False
+	MAIL_AUTH = True
+
+Config = AppConfig

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+                .MMMMNa.                       
+               dMMMMMMMN.                        
+              .MMMNMMMMM}               ....  
+               TMNMNMNN@              .MMMMMN,
+                .TMMM9^              .MMMMMMMM.
+                  ...                .MMMMMMMM
+                .MHHHN                ,WMMMM@ 
+                ,HHHHH_                  .
+                .HHHHHb               .HHHN,    
+      .....gNa,  jHHHHHL             .HHHHHF
+    .MMMMMMMMMMb  4HHHHHNJ.        .HHHHHH@
+    dMMMMMMMMMM#   ?MHHHHHHMmg++gMHHHHHHMY     
+    ,MMMMMMMMM#!     TMHHHHHHHHHHHHHHHMY         
+      ?YMMMMB^         (THHHHHHHHHHMY^
+                             ~!!              
+
+               一般社団法人 終活協議会
+               想いコーポレーショングループ
+-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="robots" content="noindex,nofollow">
+	<title>{{ content.title }}</title>
+	<link rel="stylesheet" href="/static/vendor/bulma-0.9.4/css/bulma.min.css">
+	<link rel="stylesheet" href="/static/vendor/fontawesome-free-5.15.4/css/all.min.css">
+	<link rel="stylesheet" href="{{ staticfile_add_version('static/css/style.css') }}">
+</head>
+    <body>
+    {% block navbar %}{% endblock %}
+    <div style="margin-top: 100px;">
+        {% block breadcrumb %}{% endblock %}
+        {% block message %}{% endblock %}
+        <div class="is-fullwidth m-0 p-0" style="height: 20px; min-height: 20px;"></div>
+        {% block content %}{% endblock %}
+        <div class="is-fullwidth m-0 p-0" style="height: 40px; min-height: 40px;"></div>
+    </div>
+    {% block footer %}{% endblock %}
+    {%- if 'js' in content -%}
+		{% for src in content.js %}
+			<script src="{{ staticfile_add_version(src) }}"></script>
+		{%- endfor -%}
+	{% endif %}
+    </body>
+</html>

@@ -1,0 +1,12 @@
+/home/site/***/log/app*.log
+{
+	daily
+	size 0
+	notifempty
+	missingok
+	delaycompress
+	sharedscripts
+	postrotate
+	/usr/bin/touch /home/site/***/htdocs/backend/uwsgi/logreopen.trigger > /dev/null 2>/dev/null || true
+	endscript
+}

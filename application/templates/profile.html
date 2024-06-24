@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+    <h3 class="title">プロフィール</h3>
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}
+        <ul>
+            <li>ユーザーID：{{ content.user }}</li>
+            <li><a href="/auth/change-password">パスワード変更</a></li>
+            <li><a href="/auth/logout">ログアウト</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

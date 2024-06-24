@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+    <h3 class="title">ログイン</h3>
+    <div class="box">
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="notification is-danger">
+                    {{ messages }}
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/auth/login">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="email" name="user" placeholder="Eメールアドレス", autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="password" placeholder="パスワード">
+                </div>
+            </div>
+            <div class="field">
+				<label class="checkbox">
+				<input type="checkbox" name="remember">パスワードを保存する</label>
+			</div>
+            <button class="button is-block is-info is-large is-fullwidth">ログイン</button>
+        </form>
+
+        <p>
+            パスワードお忘れですか
+            <a href="{{ url_for('auth.forgot_password') }}">クリック</a>
+        </p>
+
+    </div>
+</div>
+{% endblock %}

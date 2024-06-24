@@ -1,0 +1,62 @@
+[uwsgi]
+
+#// ------------------------------------------------------------------
+#// Option
+#// ------------------------------------------------------------------
+
+processes = 3
+threads = 4
+max-requests = 100
+max-requests-delta = 20
+buffer-size = 32768
+enable-threads = True
+#vacuum = true
+
+#// ------------------------------------------------------------------
+#// application base
+#// ------------------------------------------------------------------
+base = /home/site/yourdomain
+chdir = %(base)/htdocs/backend
+master = True
+
+touch-reload=%(chdir)/uwsgi/reload.trigger
+touch-logreopen = %(chdir)/uwsgi/logreopen.trigger
+
+#// ------------------------------------------------------------------
+#// owner
+#// ------------------------------------------------------------------
+uid = www
+gid = www
+
+#// ------------------------------------------------------------------
+#// python module to import
+#// ------------------------------------------------------------------
+app = run
+module = %(app)
+pythonpath = %(chdir)/application
+
+#// ------------------------------------------------------------------
+#// socket
+#// ------------------------------------------------------------------
+socket = %(chdir)/uwsgi/tmp/uwsgi.sock
+chmod-socket = 666
+
+#// ------------------------------------------------------------------
+#// the variable that holds a flask application inside the module imported at line #6
+#// ------------------------------------------------------------------
+callable = app
+
+#// ------------------------------------------------------------------
+#// Log
+#// ------------------------------------------------------------------
+logto = %(base)/log/app.log
+logfile-chown = www:www
+logfile-chmod = 644
+log-reopen = true
+log-x-forwarded-for = True
+log-format = %(addr) - %(user) [%(ltime)] "%(method) %(uri) %(proto)" %(status) %(size) "%(referer)" "%(uagent)"
+
+## exclude: OSError: write error
+ignore-sigpipe = true
+ignore-write-errors = true
+disable-write-exception = true
